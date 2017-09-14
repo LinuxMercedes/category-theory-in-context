@@ -1,0 +1,110 @@
+\chapter{Categories, Functors, Natural Transformations}
+\section{Abstract and concrete categories}
+
+\begin{problem}
+	\begin{enumerate}[(i)]
+		\item Show that a morphism can have at most one inverse isomorphism.
+		\item Consider a morphism $f : x \rightarrow y$.
+			Show that if there exists a pair of morphisms $g,h:y \rightrightarrows x$ so that $gf = 1_x$ and $fh = 1_y$, then $g = h$ and $f$ is an isomorphism.
+	\end{enumerate}
+\end{problem}
+
+\begin{proof}[Proof of (i)]
+	Let $f:x \rightarrow y$ be a morphism and let $g,h:y \rightrightarrows x$ be morphisms such that
+	$gf = hf = 1_x$ and $fg = fh = 1_y$.
+
+	Then $g = g1_y = gfh = 1_x h = h$.
+\end{proof}
+
+\begin{proof}[Proof of (ii)]
+	Let $f:x \rightarrow y$ be a morphism and let $g,h:y \rightrightarrows x$ be morphisms such that
+	$gf = 1_x$ and $fh = 1_y$.
+
+	Then $g = g1_y = gfh = 1_x h = h$.
+
+	Therefore, $gf = 1_x$ and $fg = fh = 1_y$, so $f$ is an isomorphism.
+\end{proof}
+
+\begin{problem}
+	Let $\category{C}$ be a category.
+	Show that the collection of isomorphisms in $\category{C}$ defines a subcagegory, the \textbf{maximal groupoid} inside $\category{C}$.
+\end{problem}
+
+\begin{proof}
+	Let $\category{G}$ be the maximal groupoid of $\category{C}$. We want to show that $\category{G}$ is a category.
+
+	By definition, the objects of $\category{G}$ are the objects of $\category{C}$ and the morphisms of $\category{G}$ are the isomorphisms in $\category{C}$.
+
+	For any identity morphism $1_x:x \rightarrow x$ in $\category{C}$, $1_x1_x = 1_x$, so $1_x$ is an isomorphism.
+	Thus $\category{G}$ has all identity morphisms in $\category{C}$.
+
+	For any morphisms $f:x \rightarrow y$ and $g:y \rightarrow z$ in $\category{G}$, there exist inverse morphisms $f\inv : y \rightarrow x$ and $g\inv : z \rightarrow y$ with $f\inv f = 1_x$, $ff\inv = 1_y$, $g\inv g = 1_y$, and $gg\inv = 1_z$.
+
+	Thus, $g f f\inv g\inv = g 1_y g\inv = gg\inv = 1_z$ and $f\inv g\inv g f = f\inv f = 1_x$, so $fg$ is an isomorphism.
+	Therefore, $\category{G}$ has composite morphisms.
+\end{proof}
+
+\begin{problem}
+	For any category $\category{C}$ and any object $c \in \category{C}$, show that:
+
+	\begin{enumerate}[(i)]
+		\item There is a category $c/\category{C}$ whose objects are morphisms $f:c \rightarrow x$ with domain $c$
+			and in which a morphism from $f:c \rightarrow x$ to $g:c \rightarrow y$ is a map $h:x \rightarrow y$ between the codomains
+			so that the triangle
+
+			\begin{tikzcd}
+				& c \arrow[ld, "f"'] \arrow[rd, "g"] &  \\
+				x \arrow[rr, "h"'] &  & y
+			\end{tikzcd}
+
+			commutes, i.e., so that $g = hf$.
+
+		\item There is a category $\category{C}/c$ whose objects are morphisms $f:x \rightarrow c$ with codomain $c$
+			and in which a morphism from $f:x \rightarrow c$ to $g:y \rightarrow c$ is a map $h:x \rightarrow y$ between the domains
+			so that the triangle
+
+			\begin{tikzcd}
+				x \arrow[rr,"h"] \arrow[rd, "f"'] &  & y \arrow[ld, "g"] \\
+				& c &
+			\end{tikzcd}
+
+			commutes, i.e., so that $f = gh$.
+	\end{enumerate}
+\end{problem}
+
+% Identities are the same as in C: f:c->x has identity 1_x; h1_xf = hf = g
+% s:f->g t:g->h  => exists u:f->h where u:x->z in C
+
+\begin{proof}[Proof of (i)]
+To avoid confusion, we will write objects and morphisms in $c/\category{C}$ in a bold font to distinguish them from objects and morphisms in $\category{C}$.
+
+The objects in $c/\category{C}$ are morphisms in $\category{C}$ where $\mathbf{f} \in c/\category{C}$ if $f : c \rightarrow x$ is a morphism in $\category{C}$.
+A morphism $\mathbf{s}: \mathbf{f} \rightarrow \mathbf{g}$ exists in $c/\category{C}$
+if morphisms $f: c \rightarrow x$, $g:c \rightarrow y$ and $s:x \rightarrow y$ exist in $\category{C}$ such that $g = sf$.
+
+The identity morphism $\mathbf{1_f}$ for the object $\mathbf{f}: c \rightarrow x$ in $c/\category{C}$ is the identity morphism $1_x$ in $\category{C}$.
+For any $\mathbf{s}: (\mathbf{f}: c \rightarrow x) \rightarrow (\mathbf{g}:c \rightarrow y)$, we have
+$\mathbf{s}\mathbf{1_f} = s 1_x = \mathbf{s}$ and $\mathbf{1_g}\mathbf{s} = 1_y s = \mathbf{s}$.
+
+If we have morphisms $\mathbf{s} : (\mathbf{f}: c \rightarrow x) \rightarrow (\mathbf{g}:c \rightarrow y)$ and
+$\mathbf{t} : (\mathbf{g}: c \rightarrow y) \rightarrow (\mathbf{h}:c \rightarrow z)$ in $c/\category{C}$, there exist morphisms
+$s : x \rightarrow y$ and $t : y \rightarrow z$ in $\category{C}$ where $g = sf$ and $h = tg$.
+Thus, $ts: x \rightarrow z$ is in $\category{C}$ and $tsf = tg = h$.
+Therefore, $\mathbf{ts}: \mathbf{f} \rightarrow \mathbf{h}$ is a morphism in $c/\category{C}$.
+\end{proof}
+
+\begin{proof}[Proof of (ii)]
+The objects in $\category{C}/c$ are morphisms in $\category{C}$ where $\mathbf{f} \in \category{C}/c$ if $f : x \rightarrow c$ is a morphism in $\category{C}$.
+A morphism $\mathbf{s}: \mathbf{f} \rightarrow \mathbf{g}$ exists in $\category{C}/c$
+if morphisms $f: x \rightarrow c$, $g:y \rightarrow c$ and $s:x \rightarrow y$ exist in $\category{C}$ such that $f = gs$.
+
+The identity morphism $\mathbf{1_f}$ for the object $\mathbf{f}: x \rightarrow c$ in $\category{C}/c$ is the identity morphism $1_x$ in $\category{C}$.
+For any $\mathbf{s}: (\mathbf{f}: x \rightarrow c) \rightarrow (\mathbf{g}:c \rightarrow y)$, we have
+$\mathbf{s}\mathbf{1_f} = s 1_x = \mathbf{s}$ and $\mathbf{1_g}\mathbf{s} = 1_y s = \mathbf{s}$.
+
+If we have morphisms $\mathbf{s} : (\mathbf{f}: x \rightarrow c) \rightarrow (\mathbf{g}:y \rightarrow c)$ and
+$\mathbf{t} : (\mathbf{g}: y \rightarrow c) \rightarrow (\mathbf{h}:z \rightarrow c)$ in $\category{C}/c$, there exist morphisms
+$s : x \rightarrow y$ and $t : y \rightarrow z$ in $\category{C}$ where $f = gs$ and $g = ht$.
+Thus, $ts: x \rightarrow z$ is in $\category{C}$ and $hts = gs = f$.
+Therefore, $\mathbf{ts}: \mathbf{f} \rightarrow \mathbf{h}$ is a morphism in $\category{C}/c$.
+\end{proof}
