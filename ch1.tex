@@ -91,6 +91,13 @@ $\mathbf{t} : (\mathbf{g}: c \rightarrow y) \rightarrow (\mathbf{h}:c \rightarro
 $s : x \rightarrow y$ and $t : y \rightarrow z$ in $\category{C}$ where $g = sf$ and $h = tg$.
 Thus, $ts: x \rightarrow z$ is in $\category{C}$ and $tsf = tg = h$.
 Therefore, $\mathbf{ts}: \mathbf{f} \rightarrow \mathbf{h}$ is a morphism in $c/\category{C}$.
+
+In other words, the following diagram commutes:
+
+\begin{tikzcd}
+ & c \arrow[ld, "f"'] \arrow[d, "g"] \arrow[rd, "h"] &  \\
+x \arrow[r, "s"] \arrow[rr, "ts"', dashed, bend right] & y \arrow[r, "t"] & z
+\end{tikzcd}
 \end{proof}
 
 \begin{proof}[Proof of (ii)]
@@ -107,4 +114,11 @@ $\mathbf{t} : (\mathbf{g}: y \rightarrow c) \rightarrow (\mathbf{h}:z \rightarro
 $s : x \rightarrow y$ and $t : y \rightarrow z$ in $\category{C}$ where $f = gs$ and $g = ht$.
 Thus, $ts: x \rightarrow z$ is in $\category{C}$ and $hts = gs = f$.
 Therefore, $\mathbf{ts}: \mathbf{f} \rightarrow \mathbf{h}$ is a morphism in $\category{C}/c$.
+
+In other words, the following diagram commutes:
+
+\begin{tikzcd}
+x \arrow[rd, "f"'] \arrow[r, "s"] \arrow[rr, "ts", dashed, bend left] & y \arrow[d, "g"] \arrow[r, "t"] & z \arrow[ld, "h"] \\
+ & c &
+\end{tikzcd}
 \end{proof}
